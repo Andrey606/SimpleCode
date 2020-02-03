@@ -1,5 +1,6 @@
 CC=g++
 CFLAGS=-I.
 
-all:
-	$(CC) main.cpp -o main 
+all: 
+	$(CC) main.cpp -o main -lpthread
+ 
