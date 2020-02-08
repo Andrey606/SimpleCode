@@ -8,14 +8,16 @@
 
 using namespace std;
 
-void DoWork(int &a)
+int Sum(int a, int b)
 {
     this_thread::sleep_for(chrono::milliseconds(1000));
-    cout << "=============\t" << "DoWork STARTED\t=============" << endl;
+    cout << "=============\t" << "Sum STARTED\t=============" << endl;
     this_thread::sleep_for(chrono::milliseconds(2000));
-    a+=5;
+    int sum = a+b;
     this_thread::sleep_for(chrono::milliseconds(1000));
-    cout << "=============\t" << "DoWork STOPPED\t=============" << endl;
+    cout << "=============\t" << "Sum STOPPED\t=============" << endl;
+
+    return sum;
 }
 
 
@@ -23,20 +25,21 @@ int main()
 {
     setlocale(LC_ALL, "ru");
 
-    int a = 10;
-
-    cout << "a = " << a << endl;
-
-    thread th(DoWork, ref(a));
+    int result;
+    // запускаем в потоке лямду которая вызовет функцию сам и вернет ее результат
+    thread th([&result]()
+    {
+        result = Sum(2, 5);
+    });
    
     for (int i = 0; i<10; i++)
     {
-        cout << "a = " << a << endl;
         cout << "ID потока = " << this_thread::get_id() << "\tmain\t" << i << endl;
         this_thread::sleep_for(chrono::milliseconds(1000));
     }
 
     th.join();
+    cout << "Sum result = " << result << endl;
    
     return 0;
 }
