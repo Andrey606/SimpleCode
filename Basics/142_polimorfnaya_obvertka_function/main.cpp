@@ -6,42 +6,60 @@
 
 #include <iostream>
 #include <functional>
+#include <vector>
 
 using namespace std;
 
-void Foo()
+void Foo(int a)
 {
-    cout << "Foo()" << endl;
+    if(a > 10 && a < 40)
+    {
+        cout << "Foo: " << a << endl;
+    }
 }
 
-int Foo2(int a)
+void Bar(int a)
 {
-    cout << "int Foo2(int)" << endl;
-    return a;
+    if(a % 2 == 0)
+    {
+        cout << "Bar: " << a << endl;
+    }
 }
 
-int Foo3(int a)
+void DoWork(vector<int> &vc, function<void(int)> f)
 {
-    cout << "int Foo3(int)" << endl;
-    return a;
+    for(auto el : vc)
+    {
+        f(el);
+    }
+}
+
+void DoWork2(vector<int> &vc, vector<function<void(int)>> &fArray)
+{
+    for(auto f : fArray)
+    {
+        for(auto el : vc)
+        {
+            f(el);
+        }
+    }
 }
 
 int main() 
 {
     setlocale(LC_ALL, "ru");
 
-    function<void()> f;
-    function<int(int)> f2;
+    vector<int> vc = { 1, 51, 4, 10, 44, 98, 22, 29, 56 };
+    
+    cout << "==== #1" << endl;
 
-    f = Foo;
-    f2 = Foo2;
+    DoWork(vc, Foo);
+    DoWork(vc, Bar);
 
-    f();
-    f2(10);
+    cout << "==== #2" << endl;
 
-    f2 = Foo3;
-
-    f2(10);
+    vector<function<void(int)>> fArr = { Foo, Bar };
+    DoWork2(vc, fArr);
     
     return 0;
 }
