@@ -3,6 +3,8 @@
         "thread": "cpp",
         "iostream": "cpp",
         "tuple": "cpp",
-        "memory": "cpp"
+        "memory": "cpp",
+        "functional": "cpp",
+        "ostream": "cpp"
     }
 }
