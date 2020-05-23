@@ -29,6 +29,8 @@ int main()
     // удаляет указатель только когда обьект класа остался один
     shared_ptr<int> p1(new int(5));
     shared_ptr<int> p2(p1);
+
+    // weak_ptr
    
     return 0;
 }

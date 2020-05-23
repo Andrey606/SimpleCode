@@ -49,7 +49,7 @@ int main()
     
     // 2) ====================================
 
-    cout << "&aRef\t" << aRef << endl;
+    cout << "&aRef\t" << &aRef << endl;
     cout << "*pa\t" << *pa << endl;
 
     aRef = 55; // теперь и переменая "а" и "aRef" = 55  
