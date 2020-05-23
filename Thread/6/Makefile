@@ -4,7 +4,8 @@ CC=g++
 CFLAGS=-c -Wall 
 CLIBS=-lpthread
 
-all: hello
+all:
+	g++ main.cpp SimpleTimer.cpp -o hello
 
 hello: main.o SimpleTimer.o
 	$(CC) main.o SimpleTimer.o -o hello 
